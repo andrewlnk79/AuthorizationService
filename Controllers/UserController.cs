@@ -26,4 +26,23 @@ public class UserController : ControllerBase
             Login = "orlov"
         };
     }
+
+    [HttpGet]
+    [Route("viewmodel")]
+    public UserViewModel GetUserViewModel()
+    {
+        var user = new User
+        {
+            Id = Guid.NewGuid(),
+            FirstName = "Иван",
+            LastName = "Иванов",
+            Email = "ivan@gmail.com",
+            Password = "11111122222qq",
+            Login = "ivanov"
+        };
+
+        var userViewModel = new UserViewModel(user);
+
+        return userViewModel;
+    }
 }
