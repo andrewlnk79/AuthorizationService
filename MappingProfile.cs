@@ -6,6 +6,7 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<User, UserViewModel>();
+        CreateMap<User, UserViewModel>()
+            .ConstructUsing(v => new UserViewModel(v));
     }
 }

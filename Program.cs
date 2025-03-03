@@ -1,4 +1,5 @@
 using AuthorizationService;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<Ilogger, Logger>();
+
+
+var MapperConfigconfig = new MapperConfiguration(v => { v.AddProfile(new MappingProfile()); });
+var mapper = MapperConfigconfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 

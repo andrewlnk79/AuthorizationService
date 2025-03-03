@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthorizationService.Controllers;
@@ -6,11 +7,13 @@ namespace AuthorizationService.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
+    private readonly IMapper _mapper;
     private Ilogger _logger;
 
-    public UserController(Ilogger logger)
+    public UserController(Ilogger logger, IMapper mapper)
     {
         _logger = logger;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -40,8 +43,8 @@ public class UserController : ControllerBase
             Password = "11111122222qq",
             Login = "ivanov"
         };
+        var userViewModel = _mapper.Map<UserViewModel>(user);
 
-        var userViewModel = new UserViewModel(user);
 
         return userViewModel;
     }
