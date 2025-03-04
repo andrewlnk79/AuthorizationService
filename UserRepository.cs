@@ -46,4 +46,9 @@ public class UserRepository : IUserRepository
     {
         return _users.FirstOrDefault(v => v.Login == login);
     }
+
+    public User GetById(Ulid id)
+    {
+        return _users.FirstOrDefault(v => v.Id == id);
+    }
 }
