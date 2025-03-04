@@ -21,7 +21,7 @@ public class UserController : ControllerBase
     {
         return new User
         {
-            Id = Guid.NewGuid(),
+            Id = Ulid.NewUlid(),
             FirstName = "Oleg",
             LastName = "Orlov",
             Email = "orlov@gmail.com",
@@ -36,7 +36,7 @@ public class UserController : ControllerBase
     {
         var user = new User
         {
-            Id = Guid.NewGuid(),
+            Id = Ulid.NewUlid(),
             FirstName = "Иван",
             LastName = "Иванов",
             Email = "ivan@gmail.com",

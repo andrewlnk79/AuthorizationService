@@ -12,7 +12,7 @@ public class UserViewModel
         FromRussia = GetFromRussiaValue(user.Email);
     }
 
-    public Guid Id { get; set; }
+    public Ulid Id { get; set; }
     public string FullName { get; set; }
     public bool FromRussia { get; set; }
 
