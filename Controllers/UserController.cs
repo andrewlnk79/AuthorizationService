@@ -1,3 +1,4 @@
+using System.Security.Authentication;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ public class UserController : ControllerBase
 {
     private readonly IMapper _mapper;
     private Ilogger _logger;
+    private IUserRepository _userRepository;
 
     public UserController(Ilogger logger, IMapper mapper)
     {
@@ -47,5 +49,22 @@ public class UserController : ControllerBase
 
 
         return userViewModel;
+    }
+
+    [HttpPost]
+    [Route("authenticate")]
+    public UserViewModel Authenticate(string login, string password)
+    {
+        if (string.IsNullOrEmpty(login) ||
+            string.IsNullOrEmpty(password))
+            throw new ArgumentNullException("Запрос не корректен");
+
+        var user = _userRepository.GetByLogin(login);
+        if (user is null)
+            throw new AuthenticationException("Пользователь на найден");
+
+        if (user.Password != password)
+            throw new AuthenticationException("Введенный пароль не корректен");
+        return _mapper.Map<UserViewModel>(user);
     }
 }
